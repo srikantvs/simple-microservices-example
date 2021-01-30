@@ -1,0 +1,69 @@
+do maven install a lot initially.
+https://download.eclipse.org/m2e-wtp/releases/1.4/  -> for annoying maven first line error. and select first three and then install them
+it should be okay after restart.
+
+mvn dependency:tree -> see the dependency tree.. project dependency tree
+<exclusions> -> to exclude dependency
+
+mvn dependency:tree -Dverbose command to print the dependency conflicts. It can help us in determining if there are any incompatibility issues with a JAR.
+server: 
+  port: 5000
+
+spring:
+  application:
+    name: brixton
+
+eureka:zr
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: http://localhost:5000/eureka
+      
+      
+      
+---- after changing to DEPARTMENT-SERVICE we have to tell our resttemplate also. otherwise we will get error.
+java.net.UnknownHostException: DEPARTMENT-SERVICE
+
+
+that if multiple services are available connected to service registry. we have to tell the service registry to load balance the request for us in the user-service because we are calling 
+DEPARTMENT-SERVICE from there.@LoadBalanced annotate the restTemplate bean.
+
+
+awesome
+------------------------------------------------------------------------
+lets create api gateway.
+
+ predicates:
+          - Path=/some/path/to/masterplans/**, /masterplans/**
+
+
+---------- 
+circuit breaker
+ - when one of our microservice is not working then it will run fall back methods and notify user this is not working(servie)
+ 
+we will implement and use hystrix library in api gateway to identify which servie is up and running and which is not.
+hystrix dashboard.
+
+----
+application.yml is for application context 
+but we need boostrap.yml file for config .. so that we are able to craete application context from application.yml file.
+
+
+
+first we need to start
+registry
+config server
+gateway
+services
+
+
+
+sleuth and zipkin used for logging purpose. for distributed log tracing.
+from which microservice particular log is generated. actually its very difficult to manage logs when lots of microservices are running.
+
+
+so we need to implement zipkin sleuth in all ms
+
+
+service name, trace id, span id, export flag.
